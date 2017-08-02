@@ -1,0 +1,32 @@
+{
+    "name": "mathieutu/laravel-json-import",
+    "description": "Export and import your models to/from JSON",
+    "type": "package",
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "^5.4",
+        "illuminate/datatabase": "^5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.*",
+        "mockery/mockery": "0.9.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mathieu TUDISCO",
+            "email": "dev@mathieutu.ovh"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MathieuTu\\JsonImport\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MathieuTu\\JsonImport\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
