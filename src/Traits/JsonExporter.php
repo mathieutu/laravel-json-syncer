@@ -47,7 +47,7 @@ trait JsonExporter
 
     public function getJsonExportableRelations(): array
     {
-        return $this->jsonExportableRelations ?? RelationsInModelFinder::children($this);
+        return $this->jsonExportableRelations ?? RelationsInModelFinder::hasOneOrMany($this);
     }
 
 

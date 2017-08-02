@@ -8,9 +8,6 @@ use Illuminate\Support\Str;
 class RelationsInModelFinder
 {
     private $model;
-    /**
-     * @var
-     */
     private $relationsType;
 
     public function __construct(Model $model, array $relationsType)
@@ -19,22 +16,23 @@ class RelationsInModelFinder
         $this->relationsType = $relationsType;
     }
 
-    public static function children(Model $model)
+    public static function hasOneOrMany(Model $model)
     {
-        return (new static($model, ['hasMany', 'hasManyThrough', 'hasOne']))->find();
+        return (new static($model, ['hasMany', 'hasOne']))->find();
     }
 
     protected function find()
     {
         return collect(get_class_methods($this->model))->sort()
             ->reject(function ($method) {
-                $this->isAnEloquentMethod($method);
+                return $this->isAnEloquentMethod($method);
             })->filter(function ($method) {
                 $code = $this->getMethodCode($method);
-                collect($this->relationsType)->contains(function ($relation) use ($code) {
+
+                return collect($this->relationsType)->contains(function ($relation) use ($code) {
                     return Str::contains($code, '$this->' . $relation . '(');
                 });
-            });
+            })->toArray();
     }
 
     protected function isAnEloquentMethod($method): bool
