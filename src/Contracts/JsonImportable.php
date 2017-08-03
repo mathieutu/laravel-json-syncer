@@ -6,5 +6,5 @@ interface JsonImportable
 {
     public static function importFromJson($objectsToCreate);
 
-    public static function getJsonImportableRelations();
+    public function getJsonImportableRelations($object = []);
 }

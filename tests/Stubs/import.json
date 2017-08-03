@@ -1,0 +1,18 @@
+{
+    "author": "Mathieu TUDISCO",
+    "username": "@mathieutu",
+    "bars": [
+        {
+            "name": "bar1",
+            "baz": {
+                "name": "bar1_baz"
+            }
+        },
+        {
+            "name": "bar2",
+            "baz": {
+                "name": "bar2_baz"
+            }
+        }
+    ]
+}
