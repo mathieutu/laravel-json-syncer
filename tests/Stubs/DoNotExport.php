@@ -1,8 +1,6 @@
 <?php
-namespace MathieuTu\JsonImport\Tests\Stubs;
 
-use MathieuTu\JsonImport\Contracts\JsonExportable;
-use MathieuTu\JsonImport\Traits\JsonExporter;
+namespace MathieuTu\JsonSyncer\Tests\Stubs;
 
 class DoNotExport extends Model
 {

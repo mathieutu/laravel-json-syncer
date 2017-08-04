@@ -20,12 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "MathieuTu\\JsonImport\\": "src/"
+            "MathieuTu\\JsonSyncer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MathieuTu\\JsonImport\\Tests\\": "tests/"
+            "MathieuTu\\JsonSyncer\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"

@@ -1,6 +1,6 @@
 <?php
 
-namespace MathieuTu\JsonImport\Tests\Stubs;
+namespace MathieuTu\JsonSyncer\Tests\Stubs;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {

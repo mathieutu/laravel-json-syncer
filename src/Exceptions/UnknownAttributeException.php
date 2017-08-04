@@ -1,6 +1,6 @@
 <?php
 
-namespace MathieuTu\JsonImport\Exceptions;
+namespace MathieuTu\JsonSyncer\Exceptions;
 
 class UnknownAttributeException extends \InvalidArgumentException
 {

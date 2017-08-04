@@ -1,14 +1,13 @@
 <?php
 
-namespace MathieuTu\JsonImport\Tests\Traits;
+namespace MathieuTu\JsonSyncer\Tests;
 
-use MathieuTu\JsonImport\Exceptions\JsonDecodingException;
-use MathieuTu\JsonImport\Exceptions\UnknownAttributeException;
-use MathieuTu\JsonImport\Tests\Stubs\Bar;
-use MathieuTu\JsonImport\Tests\Stubs\Baz;
-use MathieuTu\JsonImport\Tests\Stubs\DoNotExport;
-use MathieuTu\JsonImport\Tests\Stubs\Foo;
-use MathieuTu\JsonImport\Tests\TestCase;
+use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
+use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
+use MathieuTu\JsonSyncer\Tests\Stubs\Bar;
+use MathieuTu\JsonSyncer\Tests\Stubs\Baz;
+use MathieuTu\JsonSyncer\Tests\Stubs\DoNotExport;
+use MathieuTu\JsonSyncer\Tests\Stubs\Foo;
 
 class JsonImporterTest extends TestCase
 {

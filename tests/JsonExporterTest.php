@@ -1,12 +1,9 @@
 <?php
 
-namespace MathieuTu\JsonImport\Tests\Traits;
+namespace MathieuTu\JsonSyncer\Tests;
 
-use MathieuTu\JsonImport\Tests\Stubs\Bar;
-use MathieuTu\JsonImport\Tests\Stubs\Baz;
-use MathieuTu\JsonImport\Tests\Stubs\DoNotExport;
-use MathieuTu\JsonImport\Tests\Stubs\Foo;
-use MathieuTu\JsonImport\Tests\TestCase;
+use MathieuTu\JsonSyncer\Tests\Stubs\Bar;
+use MathieuTu\JsonSyncer\Tests\Stubs\Foo;
 
 class JsonExporterTest extends TestCase
 {

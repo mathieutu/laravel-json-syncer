@@ -1,13 +1,9 @@
 <?php
 
-namespace MathieuTu\JsonImport\Traits;
+namespace MathieuTu\JsonSyncer\Traits;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
-use Illuminate\Support\Collection;
-use MathieuTu\JsonImport\Contracts\JsonExportable;
-use MathieuTu\JsonImport\Helpers\RelationsInModelFinder;
-use \MathieuTu\JsonImport\Helpers\JsonExporter as ExporterHelper;
+use MathieuTu\JsonSyncer\Helpers\JsonExporter as ExporterHelper;
+use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
 trait JsonExporter
 {

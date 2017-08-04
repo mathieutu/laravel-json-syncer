@@ -1,12 +1,12 @@
 <?php
 
-namespace MathieuTu\JSONImport\Tests;
+namespace MathieuTu\JsonSyncer\Tests;
 
 use Illuminate\Database\Eloquent\Model;
-use MathieuTu\JsonImport\Tests\Stubs\Bar;
-use MathieuTu\JsonImport\Tests\Stubs\Baz;
-use MathieuTu\JsonImport\Tests\Stubs\DoNotExport;
-use MathieuTu\JsonImport\Tests\Stubs\Foo;
+use MathieuTu\JsonSyncer\Tests\Stubs\Bar;
+use MathieuTu\JsonSyncer\Tests\Stubs\Baz;
+use MathieuTu\JsonSyncer\Tests\Stubs\DoNotExport;
+use MathieuTu\JsonSyncer\Tests\Stubs\Foo;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

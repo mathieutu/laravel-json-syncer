@@ -1,15 +1,15 @@
 <?php
 
-namespace MathieuTu\JsonImport\Helpers;
+namespace MathieuTu\JsonSyncer\Helpers;
 
 
 use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Support\Str;
-use MathieuTu\JsonImport\Contracts\JsonImportable;
-use MathieuTu\JsonImport\Exceptions\JsonDecodingException;
-use MathieuTu\JsonImport\Exceptions\UnknownAttributeException;
+use MathieuTu\JsonSyncer\Contracts\JsonImportable;
+use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
+use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 
 class JsonImporter
 {

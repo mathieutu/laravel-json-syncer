@@ -1,7 +1,9 @@
 <?php
 
-namespace MathieuTu\JsonImport\Traits;
-use \MathieuTu\JsonImport\Helpers\JsonImporter as ImporterHelper;
+namespace MathieuTu\JsonSyncer\Traits;
+
+use MathieuTu\JsonSyncer\Helpers\JsonImporter as ImporterHelper;
+
 trait JsonImporter
 {
     protected $jsonImportableRelations;

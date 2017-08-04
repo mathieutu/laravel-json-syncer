@@ -1,6 +1,6 @@
 <?php
 
-namespace MathieuTu\JsonImport\Helpers;
+namespace MathieuTu\JsonSyncer\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;

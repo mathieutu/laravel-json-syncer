@@ -1,8 +1,8 @@
 <?php
 
-namespace MathieuTu\JsonImport\Tests\Helpers;
+namespace MathieuTu\JsonSyncer\Tests;
 
-use MathieuTu\JsonImport\Helpers\RelationsInModelFinder;
+use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
 class RelationsInModelFinderTest extends \PHPUnit\Framework\TestCase
 {

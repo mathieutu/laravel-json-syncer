@@ -1,11 +1,11 @@
 <?php
 
-namespace MathieuTu\JsonImport\Helpers;
+namespace MathieuTu\JsonSyncer\Helpers;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Support\Collection;
-use MathieuTu\JsonImport\Contracts\JsonExportable;
+use MathieuTu\JsonSyncer\Contracts\JsonExportable;
 
 class JsonExporter
 {

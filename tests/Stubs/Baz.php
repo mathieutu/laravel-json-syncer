@@ -1,11 +1,11 @@
 <?php
 
-namespace MathieuTu\JsonImport\Tests\Stubs;
+namespace MathieuTu\JsonSyncer\Tests\Stubs;
 
-use MathieuTu\JsonImport\Contracts\JsonExportable;
-use MathieuTu\JsonImport\Contracts\JsonImportable;
-use MathieuTu\JsonImport\Traits\JsonExporter;
-use MathieuTu\JsonImport\Traits\JsonImporter;
+use MathieuTu\JsonSyncer\Contracts\JsonExportable;
+use MathieuTu\JsonSyncer\Contracts\JsonImportable;
+use MathieuTu\JsonSyncer\Traits\JsonExporter;
+use MathieuTu\JsonSyncer\Traits\JsonImporter;
 
 class Baz extends Model implements JsonExportable, JsonImportable
 {

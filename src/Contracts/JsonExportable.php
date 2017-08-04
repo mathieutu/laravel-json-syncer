@@ -1,6 +1,6 @@
 <?php
 
-namespace MathieuTu\JsonImport\Contracts;
+namespace MathieuTu\JsonSyncer\Contracts;
 
 interface JsonExportable
 {
