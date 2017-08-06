@@ -10,9 +10,9 @@ trait JsonExporter
     protected $jsonExportableRelations;
     protected $jsonExportableAttributes;
 
-    public function exportToJson($options = 0): string
+    public function exportToJson($jsonOptions = 0): string
     {
-        return ExporterHelper::exportToJson($this, $options);
+        return ExporterHelper::exportToJson($this, $jsonOptions);
     }
 
     public function getJsonExportableAttributes(): array

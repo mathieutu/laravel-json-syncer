@@ -24,7 +24,7 @@ class JsonExporterTest extends TestCase
             });
 
         $this->assertEquals(
-            json_decode(file_get_contents(__DIR__ . '/../Stubs/import.json')),
+            json_decode(file_get_contents(__DIR__ . '/Stubs/import.json')),
             json_decode(Foo::first()->exportToJson())
         );
     }

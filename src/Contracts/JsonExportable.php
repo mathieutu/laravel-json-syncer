@@ -8,5 +8,5 @@ interface JsonExportable
 
     public function getJsonExportableRelations(): array;
 
-    public function exportToJson();
+    public function exportToJson($jsonOptions = 0): string;
 }

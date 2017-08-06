@@ -16,12 +16,12 @@ class RelationsInModelFinder
         $this->relationsType = $relationsType;
     }
 
-    public static function hasOneOrMany(Model $model)
+    public static function hasOneOrMany(Model $model): array
     {
         return (new static($model, ['hasMany', 'hasOne']))->find();
     }
 
-    protected function find()
+    protected function find(): array
     {
         return collect(get_class_methods($this->model))->sort()
             ->reject(function ($method) {

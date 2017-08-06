@@ -5,15 +5,23 @@ namespace MathieuTu\JsonSyncer\Tests\Stubs;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     public $timestamps = false;
-    protected static function boot()
+
+    public function setJsonImportableRelationsForTests($relations)
     {
-        parent::boot();
-        self::saving(function (Model $model) {
-            foreach ((new static)->getFillable() as $attribute) {
-                if (empty($model->$attribute)) {
-                    $model->$attribute = str_random();
-                }
-            }
-        });
+        $this->jsonImportableRelations = $relations;
+
+        return $this;
+    }
+public function setJsonImportableAttributesForTests($attributes)
+    {
+        $this->jsonImportableAttributes = $attributes;
+
+        return $this;
+    }
+
+    public function instanceImportForTests($objects) {
+        $importer = new \MathieuTu\JsonSyncer\Helpers\JsonImporter($this);
+
+        $importer->importFromJson($objects);
     }
 }

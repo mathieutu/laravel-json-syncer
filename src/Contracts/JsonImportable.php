@@ -4,7 +4,10 @@ namespace MathieuTu\JsonSyncer\Contracts;
 
 interface JsonImportable
 {
-    public static function importFromJson($objectsToCreate);
 
-    public function getJsonImportableRelations($object = []);
+    public function getJsonImportableRelations(): array;
+
+    public function getJsonImportableAttributes(): array;
+
+    public static function importFromJson($objectsToCreate): void;
 }

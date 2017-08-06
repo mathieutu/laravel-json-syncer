@@ -38,7 +38,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             function (\Illuminate\Database\Schema\Blueprint $table) use ($model) {
                 $table->increments('id');
                 foreach ($model->getFillable() as $column) {
-                    $table->string($column);
+                    $table->string($column)->nullable();
                 }
             }
         );

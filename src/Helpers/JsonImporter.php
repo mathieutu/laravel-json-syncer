@@ -20,7 +20,7 @@ class JsonImporter
         $this->importable = $importable;
     }
 
-    public function importFromJson($objects)
+    public function importFromJson($objects) : void
     {
         $objects = $this->convertObjectsToArray($objects);
 
@@ -45,28 +45,30 @@ class JsonImporter
         return $objects;
     }
 
-    protected function wrap($objects): array
+    protected function wrap(array $objects): array
     {
-        return is_array(array_values($objects)[0]) ? $objects : [$objects];
+        return empty($objects) || is_array(reset($objects)) ? $objects : [$objects];
     }
 
     protected function importAttributes($attributes): JsonImportable
     {
+        $attributes = array_only($attributes, $this->importable->getJsonImportableAttributes());
+
         return $this->importable instanceof Model ? $object = $this->importable->create($attributes) : $this->importable;
     }
 
-    protected function importRelations($object, $attributes)
+    protected function importRelations($object, $attributes): void
     {
-        foreach ($this->importable->getJsonImportableRelations($attributes) as $relationName) {
+        $relationsNames = array_intersect(array_keys($attributes), $this->importable->getJsonImportableRelations());
 
+        foreach ($relationsNames as $relationName) {
             $this->importChildrenIfImportable($this->getRelationObject($object, $relationName), $this->wrap($attributes[$relationName]));
         }
     }
 
-    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children)
+    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children): void
     {
         $childClass = $relation->getRelated();
-
         if ($childClass instanceof JsonImportable) {
             $children = $this->addParentKeyToChildren($children, $relation);
 
@@ -83,7 +85,7 @@ class JsonImporter
         }, $children);
     }
 
-    protected function getRelationObject($object, $relationName)
+    protected function getRelationObject($object, $relationName): HasOneOrMany
     {
         $relationName = Str::camel($relationName);
 
@@ -96,7 +98,7 @@ class JsonImporter
 
             return $relation;
         } catch (BadMethodCallException $e) {
-            throw new UnknownAttributeException('Unknown attribute or relation "' . $relationName . '" in "' . get_class($object) . '".');
+            throw new UnknownAttributeException('Unknown attribute or HasOneorMany relation "' . $relationName . '" in "' . get_class($object) . '".');
         }
 
 
