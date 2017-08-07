@@ -2,6 +2,7 @@
 
 namespace MathieuTu\JsonSyncer\Traits;
 
+use Illuminate\Support\Collection;
 use MathieuTu\JsonSyncer\Helpers\JsonExporter as ExporterHelper;
 use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
@@ -13,6 +14,11 @@ trait JsonExporter
     public function exportToJson($jsonOptions = 0): string
     {
         return ExporterHelper::exportToJson($this, $jsonOptions);
+    }
+
+    public function exportToCollection(): Collection
+    {
+        return ExporterHelper::exportToCollection($this);
     }
 
     public function getJsonExportableAttributes(): array

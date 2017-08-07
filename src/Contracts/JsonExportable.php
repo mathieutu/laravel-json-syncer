@@ -2,6 +2,8 @@
 
 namespace MathieuTu\JsonSyncer\Contracts;
 
+use Illuminate\Support\Collection;
+
 interface JsonExportable
 {
     public function getJsonExportableAttributes(): array;
@@ -9,4 +11,6 @@ interface JsonExportable
     public function getJsonExportableRelations(): array;
 
     public function exportToJson($jsonOptions = 0): string;
+
+    public function exportToCollection(): Collection;
 }

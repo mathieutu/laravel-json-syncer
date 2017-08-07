@@ -9,6 +9,26 @@ class JsonExporterTest extends TestCase
 {
     public function testExportToJson()
     {
+        $this->setDatabase();
+
+        $this->assertEquals(
+            json_decode(file_get_contents(__DIR__ . '/Stubs/import.json')),
+            json_decode(Foo::first()->exportToJson())
+        );
+    }
+
+    public function testExportToCollection()
+    {
+        $this->setDatabase();
+
+        $this->assertEquals(
+            json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true),
+            Foo::first()->exportToCollection()->toArray()
+        );
+    }
+
+    protected function setDatabase()
+    {
         (new Foo)->create(['author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'])
             ->bars()->createMany([
                 ['name' => 'bar1'],
@@ -21,10 +41,5 @@ class JsonExporterTest extends TestCase
                         ['name' => 'do not 3'],
                     ]);
             });
-
-        $this->assertEquals(
-            json_decode(file_get_contents(__DIR__ . '/Stubs/import.json')),
-            json_decode(Foo::first()->exportToJson())
-        );
     }
 }
