@@ -12,14 +12,16 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
         return $this;
     }
-public function setJsonImportableAttributesForTests($attributes)
+
+    public function setJsonImportableAttributesForTests($attributes)
     {
         $this->jsonImportableAttributes = $attributes;
 
         return $this;
     }
 
-    public function instanceImportForTests($objects) {
+    public function instanceImportForTests($objects)
+    {
         $importer = new \MathieuTu\JsonSyncer\Helpers\JsonImporter($this);
 
         $importer->importFromJson($objects);

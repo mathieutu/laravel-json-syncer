@@ -7,7 +7,6 @@ use MathieuTu\JsonSyncer\Tests\Stubs\Foo;
 
 class JsonExporterTest extends TestCase
 {
-
     public function testExportToJson()
     {
         (new Foo)->create(['author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'])

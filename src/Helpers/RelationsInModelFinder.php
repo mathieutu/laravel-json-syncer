@@ -59,5 +59,4 @@ class RelationsInModelFinder
 
         return $code;
     }
-
 }

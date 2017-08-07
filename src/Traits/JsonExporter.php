@@ -26,6 +26,4 @@ trait JsonExporter
     {
         return $this->jsonExportableRelations ?? RelationsInModelFinder::hasOneOrMany($this);
     }
-
-
 }

@@ -9,7 +9,7 @@ trait JsonImporter
 {
     protected $jsonImportableRelations;
 
-    public static function importFromJson($objects) : void
+    public static function importFromJson($objects)
     {
         $importer = new ImporterHelper(new static);
 

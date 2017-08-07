@@ -2,7 +2,6 @@
 
 namespace MathieuTu\JsonSyncer\Helpers;
 
-
 use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
@@ -20,7 +19,7 @@ class JsonImporter
         $this->importable = $importable;
     }
 
-    public function importFromJson($objects) : void
+    public function importFromJson($objects)
     {
         $objects = $this->convertObjectsToArray($objects);
 
@@ -42,6 +41,7 @@ class JsonImporter
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new JsonDecodingException('Invalid json format.');
         }
+
         return $objects;
     }
 
@@ -57,7 +57,7 @@ class JsonImporter
         return $this->importable instanceof Model ? $object = $this->importable->create($attributes) : $this->importable;
     }
 
-    protected function importRelations($object, $attributes): void
+    protected function importRelations($object, $attributes)
     {
         $relationsNames = array_intersect(array_keys($attributes), $this->importable->getJsonImportableRelations());
 
@@ -66,7 +66,7 @@ class JsonImporter
         }
     }
 
-    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children): void
+    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children)
     {
         $childClass = $relation->getRelated();
         if ($childClass instanceof JsonImportable) {
@@ -100,8 +100,5 @@ class JsonImporter
         } catch (BadMethodCallException $e) {
             throw new UnknownAttributeException('Unknown attribute or HasOneorMany relation "' . $relationName . '" in "' . get_class($object) . '".');
         }
-
-
     }
-
 }

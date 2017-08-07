@@ -1,5 +1,5 @@
 {
-    "name": "mathieutu/laravel-json-import",
+    "name": "mathieutu/laravel-json-syncer",
     "description": "Export and import your models to/from JSON",
     "type": "package",
     "require": {

@@ -17,5 +17,4 @@ class Bar extends Model implements JsonExportable, JsonImportable
     {
         return $this->hasOne(Baz::class);
     }
-
 }

@@ -17,6 +17,4 @@ class Baz extends Model implements JsonExportable, JsonImportable
     {
         return $this->hasMany(DoNotExport::class);
     }
-
 }
-

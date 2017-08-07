@@ -1,11 +1,11 @@
 # Laravel Json Syncer: Json importer and exporter for Laravel
 
-[![Travis build](https://img.shields.io/travis/mathieutu/laravel-json-import/master.svg?style=flat-square&label=Build)](https://travis-ci.org/mathieutu/laravel-json-import?branch=master) 
-[![StyleCI](https://styleci.io/repos/77931503/shield?branch=master)](https://styleci.io/repos/77931503) 
-[![Test coverage](https://img.shields.io/scrutinizer/coverage/g/mathieutu/laravel-json-import.svg?style=flat-square&label=Coverage)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-import/?branch=master) 
-[![Code quality](https://img.shields.io/scrutinizer/g/mathieutu/laravel-json-import.svg?style=flat-square&label=Quality)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-import/?branch=master) 
-[![Packagist downloads](https://img.shields.io/packagist/dt/mathieutu/laravel-json-import.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/mathieutu/laravel-json-import)
-[![Stable version](https://img.shields.io/packagist/v/mathieutu/laravel-json-import.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/mathieutu/laravel-json-import)
+[![Travis build](https://img.shields.io/travis/mathieutu/laravel-json-syncer/master.svg?style=flat-square&label=Build)](https://travis-ci.org/mathieutu/laravel-json-syncer?branch=master) 
+[![StyleCI](https://styleci.io/repos/99500349/shield?branch=master)](https://styleci.io/repos/99500349) 
+[![Test coverage](https://img.shields.io/scrutinizer/coverage/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Coverage)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=master) 
+[![Code quality](https://img.shields.io/scrutinizer/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Quality)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=master) 
+[![Packagist downloads](https://img.shields.io/packagist/dt/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/mathieutu/laravel-json-syncer)
+[![Stable version](https://img.shields.io/packagist/v/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/mathieutu/laravel-json-syncer)
 
 ## Installation
 

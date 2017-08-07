@@ -38,7 +38,7 @@ class JsonImporterTest extends TestCase
 
         $this->assertEquals(1, Baz::count());
         $baz = Foo::with('bars.baz')->first()->bars->pluck('baz');
-        $this->assertEquals([["id" => 1, "name" => "bar1_baz", "bar_id" => "1"], null], $baz->toArray());
+        $this->assertEquals([['id' => 1, 'name' => 'bar1_baz', 'bar_id' => '1'], null], $baz->toArray());
     }
 
     public function testImportWithAnEmptyRelation()
@@ -144,7 +144,7 @@ class JsonImporterTest extends TestCase
             ->setJsonImportableAttributesForTests(['author'])
             ->instanceImportForTests($import);
 
-        $this->assertEquals(['id' => 1, "author" => "Mathieu TUDISCO", "username" => null], Foo::first()->toArray());
+        $this->assertEquals(['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => null], Foo::first()->toArray());
         $this->assertBarsAreImported();
         $this->assertBazsAreImported();
     }
@@ -168,7 +168,7 @@ class JsonImporterTest extends TestCase
         $this->assertEquals(2, Baz::count());
         foreach (Foo::with('bars.baz')->first()->bars as $bar) {
             $baz = $bar->baz;
-            $this->assertEquals(["id" => $baz->id, "name" => $bar->name . "_baz", "bar_id" => $bar->id], $baz->toArray());
+            $this->assertEquals(['id' => $baz->id, 'name' => $bar->name . '_baz', 'bar_id' => $bar->id], $baz->toArray());
         }
     }
 
@@ -185,8 +185,6 @@ class JsonImporterTest extends TestCase
     protected function assertFooIsImported()
     {
         $this->assertEquals(1, Foo::count());
-        $this->assertEquals(['id' => 1, "author" => "Mathieu TUDISCO", "username" => "@mathieutu"], Foo::first()->toArray());
+        $this->assertEquals(['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'], Foo::first()->toArray());
     }
-
-
 }
