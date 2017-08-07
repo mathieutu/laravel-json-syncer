@@ -42,7 +42,11 @@ class JsonImporter
             throw new JsonDecodingException('Invalid json format.');
         }
 
-        return $objects;
+        if ($objects instanceof \Illuminate\Contracts\Support\Arrayable) {
+            $objects = $objects->toArray();
+        }
+
+        return (array) $objects;
     }
 
     protected function wrap(array $objects): array
