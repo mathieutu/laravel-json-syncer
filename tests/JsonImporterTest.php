@@ -162,7 +162,7 @@ class JsonImporterTest extends TestCase
             public function setAuthorAttribute()
             {
                 if ($this->isImporting()) {
-                    throw new \Exception("Is importing ok !");
+                    throw new \Exception('Is importing ok !');
                 }
 
                 $this->attributes['author'] = 'not importing';

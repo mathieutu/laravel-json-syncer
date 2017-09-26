@@ -31,26 +31,13 @@ class JsonExporterTest extends TestCase
     {
         $this->setDatabase();
 
-        $foo = (new class extends Foo {
-            protected $fillable = ['author'];
-            protected $table = 'foos';
-
-            public function getAuthorAttribute($value)
-            {
-                if ($this->isExporting()) {
-                    throw new \Exception("Is exporting ok !");
-                }
-
-                return $value;
-            }
-        })->firstOrFail();
+        $foo = $this->testingFooModel()->firstOrFail();
 
         $this->assertEquals('Mathieu TUDISCO', $foo->author);
 
         $this->expectExceptionMessage('Is exporting ok !');
         $foo->exportToJson();
     }
-
 
     protected function setDatabase()
     {
@@ -66,5 +53,23 @@ class JsonExporterTest extends TestCase
                         ['name' => 'do not 3'],
                     ]);
             });
+    }
+
+    protected function testingFooModel()
+    {
+        return new class extends Foo
+        {
+            protected $fillable = ['author'];
+            protected $table = 'foos';
+
+            public function getAuthorAttribute($value)
+            {
+                if ($this->isExporting()) {
+                    throw new \Exception('Is exporting ok !');
+                }
+
+                return $value;
+            }
+        };
     }
 }
