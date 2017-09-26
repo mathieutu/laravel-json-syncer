@@ -10,7 +10,7 @@ trait JsonImporter
     protected $jsonImportableAttributes;
     protected $jsonImportableRelations;
 
-    public static function importFromJson($objects): void
+    public static function importFromJson($objects)
     {
         ImporterHelper::importFromJson(new static, $objects);
     }

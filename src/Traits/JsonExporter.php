@@ -24,8 +24,8 @@ trait JsonExporter
     public function getJsonExportableAttributes(): array
     {
         return $this->jsonExportableAttributes ?? array_filter($this->getFillable(), function ($attribute) {
-                return !ends_with($attribute, '_id');
-            });
+            return !ends_with($attribute, '_id');
+        });
     }
 
     public function getJsonExportableRelations(): array
