@@ -22,10 +22,10 @@ class JsonImporterTest extends TestCase
         $this->assertFooIsImported();
         $this->assertBarsAreImported();
         $this->assertBazsAreImported();
-        $this->assertEquals(0, DoNotExport::count());
+        $this->assertEquals(0, DoNotExport::query()->count());
     }
 
-    public function testImportWithNoRelation()
+    public function testImportWithoutRelation()
     {
         $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
 
@@ -36,7 +36,7 @@ class JsonImporterTest extends TestCase
         $this->assertFooIsImported();
         $this->assertBarsAreImported();
 
-        $this->assertEquals(1, Baz::count());
+        $this->assertEquals(1, Baz::query()->count());
         $baz = Foo::with('bars.baz')->first()->bars->pluck('baz');
         $this->assertEquals([['id' => 1, 'name' => 'bar1_baz', 'bar_id' => '1'], null], $baz->toArray());
     }
@@ -51,10 +51,10 @@ class JsonImporterTest extends TestCase
 
         Foo::importFromJson($import);
 
-        $this->assertEquals(1, Foo::count());
-        $this->assertEquals(0, Bar::count());
-        $this->assertEquals(0, Baz::count());
-        $this->assertEquals(0, DoNotExport::count());
+        $this->assertEquals(1, Foo::query()->count());
+        $this->assertEquals(0, Bar::query()->count());
+        $this->assertEquals(0, Baz::query()->count());
+        $this->assertEquals(0, DoNotExport::query()->count());
     }
 
     public function testImportSeveralTimesWillJustAdd()
@@ -63,16 +63,16 @@ class JsonImporterTest extends TestCase
 
         Foo::importFromJson($import);
 
-        $fooCount = Foo::count();
-        $barCount = Bar::count();
-        $bazCount = Baz::count();
-        $doNotExportCount = DoNotExport::count();
+        $fooCount = Foo::query()->count();
+        $barCount = Bar::query()->count();
+        $bazCount = Baz::query()->count();
+        $doNotExportCount = DoNotExport::query()->count();
 
         foreach (range(1, 3) as $time) {
-            $this->assertEquals($time * $fooCount, Foo::count());
-            $this->assertEquals($time * $barCount, Bar::count());
-            $this->assertEquals($time * $bazCount, Baz::count());
-            $this->assertEquals($time * $doNotExportCount, DoNotExport::count());
+            $this->assertEquals($time * $fooCount, Foo::query()->count());
+            $this->assertEquals($time * $barCount, Bar::query()->count());
+            $this->assertEquals($time * $bazCount, Baz::query()->count());
+            $this->assertEquals($time * $doNotExportCount, DoNotExport::query()->count());
 
             Foo::importFromJson($import);
         }
@@ -159,13 +159,13 @@ class JsonImporterTest extends TestCase
         ];
 
         Baz::importFromJson($baz);
-        $this->assertEquals(1, Baz::count());
-        $this->assertEquals(0, DoNotExport::count());
+        $this->assertEquals(1, Baz::query()->count());
+        $this->assertEquals(0, DoNotExport::query()->count());
     }
 
     protected function assertBazsAreImported()
     {
-        $this->assertEquals(2, Baz::count());
+        $this->assertEquals(2, Baz::query()->count());
         foreach (Foo::with('bars.baz')->first()->bars as $bar) {
             $baz = $bar->baz;
             $this->assertEquals(['id' => $baz->id, 'name' => $bar->name . '_baz', 'bar_id' => $bar->id], $baz->toArray());
@@ -174,8 +174,8 @@ class JsonImporterTest extends TestCase
 
     protected function assertBarsAreImported()
     {
-        $this->assertEquals(2, Bar::count());
-        $bars = Foo::first()->bars;
+        $this->assertEquals(2, Bar::query()->count());
+        $bars = Foo::query()->first()->bars;
         $this->assertEquals([
             ['id' => 1, 'name' => 'bar1', 'foo_id' => 1],
             ['id' => 2, 'name' => 'bar2', 'foo_id' => 1],
@@ -184,7 +184,7 @@ class JsonImporterTest extends TestCase
 
     protected function assertFooIsImported()
     {
-        $this->assertEquals(1, Foo::count());
-        $this->assertEquals(['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'], Foo::first()->toArray());
+        $this->assertEquals(1, Foo::query()->count());
+        $this->assertEquals(['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'], Foo::query()->first()->toArray());
     }
 }

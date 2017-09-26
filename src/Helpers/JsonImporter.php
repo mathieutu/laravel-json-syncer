@@ -19,7 +19,12 @@ class JsonImporter
         $this->importable = $importable;
     }
 
-    public function importFromJson($objects)
+    public static function importFromJson(JsonImportable $importable, $objects): void
+    {
+        (new static($importable))->import($objects);
+    }
+
+    public function import($objects): void
     {
         $objects = $this->convertObjectsToArray($objects);
 

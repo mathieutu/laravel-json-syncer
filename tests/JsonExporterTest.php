@@ -13,7 +13,7 @@ class JsonExporterTest extends TestCase
 
         $this->assertEquals(
             json_decode(file_get_contents(__DIR__ . '/Stubs/import.json')),
-            json_decode(Foo::first()->exportToJson())
+            json_decode(Foo::query()->first()->exportToJson())
         );
     }
 
@@ -23,7 +23,7 @@ class JsonExporterTest extends TestCase
 
         $this->assertEquals(
             json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true),
-            Foo::first()->exportToCollection()->toArray()
+            Foo::query()->first()->exportToCollection()->toArray()
         );
     }
 

@@ -2,6 +2,8 @@
 
 namespace MathieuTu\JsonSyncer\Tests\Stubs;
 
+use MathieuTu\JsonSyncer\Helpers\JsonImporter;
+
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     public $timestamps = false;
@@ -22,8 +24,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public function instanceImportForTests($objects)
     {
-        $importer = new \MathieuTu\JsonSyncer\Helpers\JsonImporter($this);
-
-        $importer->importFromJson($objects);
+        JsonImporter::importFromJson($this, $objects);
     }
 }
