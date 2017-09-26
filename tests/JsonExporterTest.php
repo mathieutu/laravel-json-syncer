@@ -57,8 +57,7 @@ class JsonExporterTest extends TestCase
 
     protected function testingFooModel()
     {
-        return new class extends Foo
-        {
+        return new class extends Foo {
             protected $fillable = ['author'];
             protected $table = 'foos';
 
