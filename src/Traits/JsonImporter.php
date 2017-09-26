@@ -28,4 +28,9 @@ trait JsonImporter
             ?? $this->jsonExportableRelations
             ?? RelationsInModelFinder::hasOneOrMany($this);
     }
+
+    public function isImporting(): bool
+    {
+        return collect(debug_backtrace())->contains('class', ImporterHelper::class);
+    }
 }

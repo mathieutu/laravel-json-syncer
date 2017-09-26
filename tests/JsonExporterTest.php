@@ -27,6 +27,31 @@ class JsonExporterTest extends TestCase
         );
     }
 
+    public function testIsExportingMethod()
+    {
+        $this->setDatabase();
+
+        $foo = (new class extends Foo {
+            protected $fillable = ['author'];
+            protected $table = 'foos';
+
+            public function getAuthorAttribute($value)
+            {
+                if ($this->isExporting()) {
+                    throw new \Exception("Is exporting ok !");
+                }
+
+                return $value;
+            }
+        })->firstOrFail();
+
+        $this->assertEquals('Mathieu TUDISCO', $foo->author);
+
+        $this->expectExceptionMessage('Is exporting ok !');
+        $foo->exportToJson();
+    }
+
+
     protected function setDatabase()
     {
         (new Foo)->create(['author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'])

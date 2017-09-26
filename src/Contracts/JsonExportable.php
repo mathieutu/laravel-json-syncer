@@ -13,4 +13,6 @@ interface JsonExportable
     public function exportToJson($jsonOptions = 0): string;
 
     public function exportToCollection(): Collection;
+
+    public function isExporting(): bool;
 }

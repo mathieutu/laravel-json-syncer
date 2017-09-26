@@ -32,4 +32,9 @@ trait JsonExporter
     {
         return $this->jsonExportableRelations ?? RelationsInModelFinder::hasOneOrMany($this);
     }
+
+    public function isExporting(): bool
+    {
+        return collect(debug_backtrace())->contains('class', ExporterHelper::class);
+    }
 }

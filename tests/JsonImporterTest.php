@@ -149,6 +149,35 @@ class JsonImporterTest extends TestCase
         $this->assertBazsAreImported();
     }
 
+    public function testIsImportingMethod()
+    {
+        $import = [
+            'author' => 'Mathieu',
+        ];
+
+        $foo = new class extends Foo {
+            protected $fillable = ['author'];
+            protected $table = 'foos';
+
+            public function setAuthorAttribute()
+            {
+                if ($this->isImporting()) {
+                    throw new \Exception("Is importing ok !");
+                }
+
+                $this->attributes['author'] = 'not importing';
+            }
+        };
+
+        $foo->author = 'test';
+        $this->assertEquals('not importing', $foo->author);
+
+        $this->expectExceptionMessage('Is importing ok !');
+
+        $foo->setJsonImportableAttributesForTests(array_keys($import))
+            ->instanceImportForTests($import);
+    }
+
     public function testImportNonImportableObjects()
     {
         $baz = [

@@ -9,4 +9,6 @@ interface JsonImportable
     public function getJsonImportableAttributes(): array;
 
     public static function importFromJson($objectsToCreate): void;
+
+    public function isImporting(): bool;
 }
