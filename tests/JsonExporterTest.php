@@ -31,7 +31,7 @@ class JsonExporterTest extends TestCase
     {
         $this->setDatabase();
 
-        $foo = $this->testingFooModel()->firstOrFail();
+        $foo = $this->fooModelForTest()->firstOrFail();
 
         $this->assertEquals('Mathieu TUDISCO', $foo->author);
 
@@ -55,7 +55,7 @@ class JsonExporterTest extends TestCase
             });
     }
 
-    protected function testingFooModel()
+    protected function fooModelForTest()
     {
         return new class extends Foo {
             protected $fillable = ['author'];
