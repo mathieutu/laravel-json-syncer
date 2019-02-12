@@ -54,9 +54,9 @@ class JsonImporter
         return (array) $objects;
     }
 
-    protected function wrap(array $objects): array
+    protected function wrap($objects): array
     {
-        return empty($objects) || is_array(reset($objects)) ? $objects : [$objects];
+        return (empty($objects) || is_array(reset($objects)) ? $objects : [$objects]) ?? [];
     }
 
     protected function importAttributes($attributes): JsonImportable
