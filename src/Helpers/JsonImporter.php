@@ -60,7 +60,7 @@ class JsonImporter
     {
         $attributes = array_only($attributes, $this->importable->getJsonImportableAttributes());
 
-        return $this->importable instanceof Model ? $object = $this->importable->create($attributes) : $this->importable;
+        return $this->importable instanceof Model ?  $this->importable->create($attributes) : $this->importable;
     }
 
     protected function importRelations($object, $attributes)

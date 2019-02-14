@@ -118,6 +118,13 @@ class JsonImporterTest extends TestCase
         $this->assertAllImportedInDatabase();
     }
 
+    public function testImportFromArrayable()
+    {
+        Foo::importFromJson(collect($this->getImportArray()));
+
+        $this->assertAllImportedInDatabase();
+    }
+
     public function testImportNullRelation()
     {
         $objects = $this->getImportArray();
