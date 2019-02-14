@@ -12,6 +12,7 @@ class RelationsInModelFinderTest extends \PHPUnit\Framework\TestCase
     }
 }
 
+// phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
 class MyModel extends \Illuminate\Database\Eloquent\Model
 {
     public function foos()

@@ -107,7 +107,9 @@ class JsonImporter
 
             return $relation;
         } catch (BadMethodCallException $e) {
-            throw new UnknownAttributeException('Unknown attribute or HasOneorMany relation "' . $relationName . '" in "' . get_class($object) . '".');
+            $class = get_class($object);
+
+            throw new UnknownAttributeException("Unknown attribute or HasOneorMany relation '$relationName' in '$class'.");
         }
     }
 }

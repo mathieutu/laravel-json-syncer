@@ -180,7 +180,7 @@ class JsonImporterTest extends TestCase
     public function testImportANonRelationMethodWithCustomRelations()
     {
         $this->expectException(UnknownAttributeException::class);
-        $this->expectExceptionMessage('Unknown attribute or HasOneorMany relation "otherMethod" in "MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo".');
+        $this->expectExceptionMessage("Unknown attribute or HasOneorMany relation 'otherMethod' in 'MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo'");
 
         $import = $this->getImportArray();
         $import['otherMethod'] = [];
@@ -192,7 +192,7 @@ class JsonImporterTest extends TestCase
     public function testImportUnknownRelationWithCustomRelations()
     {
         $this->expectException(UnknownAttributeException::class);
-        $this->expectExceptionMessage('Unknown attribute or HasOneorMany relation "test" in "MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo".');
+        $this->expectExceptionMessage("Unknown attribute or HasOneorMany relation 'test' in 'MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo'.");
 
         $import = $this->getImportArray();
         $import['test'] = [];

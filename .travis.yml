@@ -3,6 +3,8 @@ language: php
 php:
   - 7.0
   - 7.1
+  - 7.2
+  - 7.3
 
 sudo: false
 
@@ -17,6 +19,8 @@ install:
   - travis_retry composer update --no-interaction --prefer-dist
 
 script:
+  - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+  - php vendor/bin/phpcs
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_success:

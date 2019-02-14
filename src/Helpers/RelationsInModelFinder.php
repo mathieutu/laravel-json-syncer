@@ -55,6 +55,7 @@ class RelationsInModelFinder
             $code .= $file->current();
             $file->next();
         }
+
         $code = trim(preg_replace('/\s\s+/', '', $code));
 
         return $code;
