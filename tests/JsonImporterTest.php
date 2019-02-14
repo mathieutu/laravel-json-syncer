@@ -22,12 +22,40 @@ class JsonImporterTest extends TestCase
         $this->assertFooIsImported();
         $this->assertBarsAreImported();
         $this->assertBazsAreImported();
-        $this->assertEquals(0, DoNotExport::query()->count());
+        $this->assertEquals(0, DoNotExport::count());
+    }
+
+    protected function assertFooIsImported()
+    {
+        $this->assertEquals(1, Foo::count());
+        $this->assertEquals(
+            ['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'],
+            Foo::first()->toArray()
+        );
+    }
+
+    protected function assertBarsAreImported()
+    {
+        $this->assertEquals(2, Bar::count());
+        $bars = Foo::first()->bars;
+        $this->assertEquals([
+            ['id' => 1, 'name' => 'bar1', 'foo_id' => 1],
+            ['id' => 2, 'name' => 'bar2', 'foo_id' => 1],
+        ], $bars->toArray());
+    }
+
+    protected function assertBazsAreImported()
+    {
+        $this->assertEquals(2, Baz::count());
+        foreach (Foo::with('bars.baz')->first()->bars as $bar) {
+            $baz = $bar->baz;
+            $this->assertEquals(['id' => $baz->id, 'name' => $bar->name . '_baz', 'bar_id' => $bar->id], $baz->toArray());
+        }
     }
 
     public function testImportWithoutRelation()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
 
         unset($import['bars'][1]['baz']);
 
@@ -36,14 +64,19 @@ class JsonImporterTest extends TestCase
         $this->assertFooIsImported();
         $this->assertBarsAreImported();
 
-        $this->assertEquals(1, Baz::query()->count());
+        $this->assertEquals(1, Baz::count());
         $baz = Foo::with('bars.baz')->first()->bars->pluck('baz');
         $this->assertEquals([['id' => 1, 'name' => 'bar1_baz', 'bar_id' => '1'], null], $baz->toArray());
     }
 
+    private function getImportArray(): array
+    {
+        return json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+    }
+
     public function testImportWithAnEmptyRelation()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
 
         $import['bars'] = [];
 
@@ -51,28 +84,28 @@ class JsonImporterTest extends TestCase
 
         Foo::importFromJson($import);
 
-        $this->assertEquals(1, Foo::query()->count());
-        $this->assertEquals(0, Bar::query()->count());
-        $this->assertEquals(0, Baz::query()->count());
-        $this->assertEquals(0, DoNotExport::query()->count());
+        $this->assertEquals(1, Foo::count());
+        $this->assertEquals(0, Bar::count());
+        $this->assertEquals(0, Baz::count());
+        $this->assertEquals(0, DoNotExport::count());
     }
 
     public function testImportSeveralTimesWillJustAdd()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
 
         Foo::importFromJson($import);
 
-        $fooCount = Foo::query()->count();
-        $barCount = Bar::query()->count();
-        $bazCount = Baz::query()->count();
-        $doNotExportCount = DoNotExport::query()->count();
+        $fooCount = Foo::count();
+        $barCount = Bar::count();
+        $bazCount = Baz::count();
+        $doNotExportCount = DoNotExport::count();
 
         foreach (range(1, 3) as $time) {
-            $this->assertEquals($time * $fooCount, Foo::query()->count());
-            $this->assertEquals($time * $barCount, Bar::query()->count());
-            $this->assertEquals($time * $bazCount, Baz::query()->count());
-            $this->assertEquals($time * $doNotExportCount, DoNotExport::query()->count());
+            $this->assertEquals($time * $fooCount, Foo::count());
+            $this->assertEquals($time * $barCount, Bar::count());
+            $this->assertEquals($time * $bazCount, Baz::count());
+            $this->assertEquals($time * $doNotExportCount, DoNotExport::count());
 
             Foo::importFromJson($import);
         }
@@ -80,9 +113,41 @@ class JsonImporterTest extends TestCase
 
     public function testImportFromArray()
     {
-        Foo::importFromJson(json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true));
+        Foo::importFromJson($this->getImportArray());
 
         $this->assertAllImportedInDatabase();
+    }
+
+    public function testImportNullRelation()
+    {
+        $objects = $this->getImportArray();
+        $objects['bars'] = null;
+
+        Foo::importFromJson($objects);
+
+        $this->assertFooIsImported();
+
+        $this->assertEquals(0, Bar::count());
+        $bars = Foo::first()->bars;
+        $this->assertEquals([], $bars->toArray());
+
+        $this->assertEquals(0, Baz::count());
+        $this->assertEquals(0, DoNotExport::count());
+    }
+
+    public function testImportNullAttribute()
+    {
+        $objects = $this->getImportArray();
+        $objects['author'] = null;
+
+        Foo::importFromJson($objects);
+
+        $this->assertEquals(1, Foo::count());
+        $this->assertEquals(['id' => 1, 'author' => null, 'username' => '@mathieutu'], Foo::first()->toArray());
+
+        $this->assertBarsAreImported();
+        $this->assertBazsAreImported();
+        $this->assertEquals(0, DoNotExport::count());
     }
 
     public function testImportBadJson()
@@ -94,7 +159,7 @@ class JsonImporterTest extends TestCase
 
     public function testImportUnWantedData()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
         $import['bad'] = 'attribute';
 
         Foo::importFromJson($import);
@@ -104,7 +169,7 @@ class JsonImporterTest extends TestCase
 
     public function testImportNonRelationMethodWithDefaultRelations()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
         $import['otherMethod'] = ['Hello you!'];
 
         Foo::importFromJson($import);
@@ -117,7 +182,7 @@ class JsonImporterTest extends TestCase
         $this->expectException(UnknownAttributeException::class);
         $this->expectExceptionMessage('Unknown attribute or HasOneorMany relation "otherMethod" in "MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo".');
 
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
         $import['otherMethod'] = [];
 
         (new Foo)->setJsonImportableRelationsForTests(['bars', 'otherMethod'])
@@ -129,7 +194,7 @@ class JsonImporterTest extends TestCase
         $this->expectException(UnknownAttributeException::class);
         $this->expectExceptionMessage('Unknown attribute or HasOneorMany relation "test" in "MathieuTu\\JsonSyncer\\Tests\\Stubs\\Foo".');
 
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
         $import['test'] = [];
 
         (new Foo)->setJsonImportableRelationsForTests(['bars', 'test'])
@@ -138,7 +203,7 @@ class JsonImporterTest extends TestCase
 
     public function testImportWithCustomRelationsAndAttributes()
     {
-        $import = json_decode(file_get_contents(__DIR__ . '/Stubs/import.json'), true);
+        $import = $this->getImportArray();
 
         (new Foo)->setJsonImportableRelationsForTests(['bars'])
             ->setJsonImportableAttributesForTests(['author'])
@@ -155,7 +220,8 @@ class JsonImporterTest extends TestCase
             'author' => 'Mathieu',
         ];
 
-        $foo = new class extends Foo {
+        $foo = new class extends Foo
+        {
             protected $fillable = ['author'];
             protected $table = 'foos';
 
@@ -188,32 +254,7 @@ class JsonImporterTest extends TestCase
         ];
 
         Baz::importFromJson($baz);
-        $this->assertEquals(1, Baz::query()->count());
-        $this->assertEquals(0, DoNotExport::query()->count());
-    }
-
-    protected function assertBazsAreImported()
-    {
-        $this->assertEquals(2, Baz::query()->count());
-        foreach (Foo::with('bars.baz')->first()->bars as $bar) {
-            $baz = $bar->baz;
-            $this->assertEquals(['id' => $baz->id, 'name' => $bar->name . '_baz', 'bar_id' => $bar->id], $baz->toArray());
-        }
-    }
-
-    protected function assertBarsAreImported()
-    {
-        $this->assertEquals(2, Bar::query()->count());
-        $bars = Foo::query()->first()->bars;
-        $this->assertEquals([
-            ['id' => 1, 'name' => 'bar1', 'foo_id' => 1],
-            ['id' => 2, 'name' => 'bar2', 'foo_id' => 1],
-        ], $bars->toArray());
-    }
-
-    protected function assertFooIsImported()
-    {
-        $this->assertEquals(1, Foo::query()->count());
-        $this->assertEquals(['id' => 1, 'author' => 'Mathieu TUDISCO', 'username' => '@mathieutu'], Foo::query()->first()->toArray());
+        $this->assertEquals(1, Baz::count());
+        $this->assertEquals(0, DoNotExport::count());
     }
 }

@@ -28,11 +28,8 @@ class JsonImporter
     {
         $objects = $this->convertObjectsToArray($objects);
 
-        $objects = $this->wrap($objects);
-
         foreach ($objects as $attributes) {
             $object = $this->importAttributes($attributes);
-
             $this->importRelations($object, $attributes);
         }
     }
@@ -51,7 +48,7 @@ class JsonImporter
             $objects = $objects->toArray();
         }
 
-        return (array) $objects;
+        return $this->wrap((array) $objects);
     }
 
     protected function wrap(array $objects): array
@@ -71,7 +68,10 @@ class JsonImporter
         $relationsNames = array_intersect(array_keys($attributes), $this->importable->getJsonImportableRelations());
 
         foreach ($relationsNames as $relationName) {
-            $this->importChildrenIfImportable($this->getRelationObject($object, $relationName), $this->wrap($attributes[$relationName]));
+            $children = $this->convertObjectsToArray($attributes[$relationName]);
+            $relation = $this->getRelationObject($object, $relationName);
+
+            $this->importChildrenIfImportable($relation, $children);
         }
     }
 
