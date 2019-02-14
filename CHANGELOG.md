@@ -1,6 +1,27 @@
 # Changelog
 
 
+<a name="1.1.0"></a>
+## 1.1.0 (2019-02-14)
+
+### Added
+
+- ✨ Add the possibility to pass null to one to many relationships. [[7452c15](https://github.com/mathieutu/laravel-json-syncer/commit/7452c15bbec7faa9fd4d1ad1ddc951fe01b77412)]
+- ✨ Add isExporting and isImporting methods. [[79e5ad3](https://github.com/mathieutu/laravel-json-syncer/commit/79e5ad36c60153ad84176f31c74e7628f53d272d)]
+
+### Changed
+
+- 🎨 Refactor importFromJson helper method to static. [[2891596](https://github.com/mathieutu/laravel-json-syncer/commit/28915961e9fc93f175522a01c60b6553be6491a5)]
+
+### Fixed
+
+- 💚 Fix Php7 & StyleCI. [[e9322c7](https://github.com/mathieutu/laravel-json-syncer/commit/e9322c7913022fd8c40a88fe57f81cb62e5fec17)]
+
+### Miscellaneous
+
+- 📝 Add Changelog. [[765dd1b](https://github.com/mathieutu/laravel-json-syncer/commit/765dd1ba198458fe55db10d7032def068f58247d)]
+
+
 <a name="1.0.0"></a>
 ## 1.0.0 (2017-08-07)
 
