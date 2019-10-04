@@ -5,6 +5,7 @@ namespace MathieuTu\JsonSyncer\Helpers;
 use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use MathieuTu\JsonSyncer\Contracts\JsonImportable;
 use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
@@ -58,7 +59,7 @@ class JsonImporter
 
     protected function importAttributes($attributes): JsonImportable
     {
-        $attributes = array_only($attributes, $this->importable->getJsonImportableAttributes());
+        $attributes = Arr::only($attributes, $this->importable->getJsonImportableAttributes());
 
         return $this->importable instanceof Model ?  $this->importable->create($attributes) : $this->importable;
     }
