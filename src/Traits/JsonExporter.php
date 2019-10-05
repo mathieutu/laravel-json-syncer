@@ -3,6 +3,7 @@
 namespace MathieuTu\JsonSyncer\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use MathieuTu\JsonSyncer\Helpers\JsonExporter as ExporterHelper;
 use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
@@ -24,7 +25,7 @@ trait JsonExporter
     public function getJsonExportableAttributes(): array
     {
         return $this->jsonExportableAttributes ?? array_filter($this->getFillable(), function ($attribute) {
-            return !ends_with($attribute, '_id');
+            return ! Str::endsWith($attribute, '_id');
         });
     }
 
