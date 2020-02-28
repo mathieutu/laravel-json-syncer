@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use MathieuTu\JsonSyncer\Contracts\JsonImportable;
-use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
 use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 
 class JsonImporter

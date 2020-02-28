@@ -3,7 +3,6 @@
 namespace MathieuTu\JsonSyncer\Tests;
 
 use JsonException;
-use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
 use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 use MathieuTu\JsonSyncer\Tests\Stubs\Bar;
 use MathieuTu\JsonSyncer\Tests\Stubs\Baz;
