@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright (c) Mathieu TUDISCO <dev@mathieutu.ovh>
+Copyright (c) Mathieu TUDISCO <oss@mathieutu.dev>
 
 >Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
