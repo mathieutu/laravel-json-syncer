@@ -1,8 +1,8 @@
 language: php
 
 php:
-  - 7.2
   - 7.3
+  - 7.4
 
 env:
   global:
@@ -36,7 +36,6 @@ install:
   - composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
   - php vendor/bin/phpcs
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
