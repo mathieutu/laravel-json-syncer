@@ -1,6 +1,24 @@
 # Changelog
 
 
+<a name="1.2.0"></a>
+## 1.2.0 (2020-02-28)
+
+### Added
+
+- 📦 Implement Laravel 6 compatibility ([#11](https://github.com/mathieutu/laravel-json-syncer/issues/11)) [[f7eb983](https://github.com/mathieutu/laravel-json-syncer/commit/f7eb9835a735f60dc191353cbd4b282a20eea481)]
+
+### Fixed
+
+- 💚 🎨 Replace StyleCI by PHPCs and fix code style. [[625e7fb](https://github.com/mathieutu/laravel-json-syncer/commit/625e7fbbd9c36752eab94048740bd50a5f0dc449)]
+
+### Miscellaneous
+
+- ✅ Increase code coverage and quality. [[d214cda](https://github.com/mathieutu/laravel-json-syncer/commit/d214cdacd2428e888c21151ed8901cb44b25b237)]
+- 📝 Change email. [[2b47b0a](https://github.com/mathieutu/laravel-json-syncer/commit/2b47b0aeb8536d3ef14ff7f1ddb16a4cce8b252c)]
+- 👷 Update tests version. [[28554fe](https://github.com/mathieutu/laravel-json-syncer/commit/28554fec34262e2ec957f8c81950fb25d789f2bc)]
+
+
 <a name="1.1.0"></a>
 ## 1.1.0 (2019-02-14)
 
