@@ -1,6 +1,14 @@
 # Changelog
 
 
+<a name="1.2.1"></a>
+## 1.2.1 (2020-02-28)
+
+### Fixed
+
+- 🐛 Use native Json exception if parsing problem. [[698ec4f](https://github.com/mathieutu/laravel-json-syncer/commit/698ec4f6e3db505448d1eb5ef18d91102baec582)]
+
+
 <a name="1.2.0"></a>
 ## 1.2.0 (2020-02-28)
 
