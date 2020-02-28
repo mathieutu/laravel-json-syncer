@@ -18,7 +18,7 @@ class JsonExporter
 
     public static function exportToJson(JsonExportable $exportable, $options = 0)
     {
-        return self::exportToCollection($exportable)->toJson($options);
+        return self::exportToCollection($exportable)->toJson($options | JSON_THROW_ON_ERROR);
     }
 
     public static function exportToCollection(JsonExportable $exportable): Collection

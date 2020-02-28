@@ -38,14 +38,10 @@ class JsonImporter
     protected function convertObjectsToArray($objects): array
     {
         if (is_string($objects)) {
-            $objects = json_decode($objects, true);
+            $objects = json_decode($objects, true, 512, JSON_THROW_ON_ERROR);
         }
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new JsonDecodingException('Invalid json format.');
-        }
-
-        if ($objects instanceof \Illuminate\Contracts\Support\Arrayable) {
+        if (method_exists($objects, 'toArray')) {
             $objects = $objects->toArray();
         }
 
@@ -54,7 +50,7 @@ class JsonImporter
 
     protected function wrap(array $objects): array
     {
-        return empty($objects) || is_array(reset($objects)) ? $objects : [$objects];
+        return (empty($objects) || is_array(reset($objects))) ? $objects : [$objects];
     }
 
     protected function importAttributes($attributes): JsonImportable

@@ -3,7 +3,7 @@
   "description": "Export and import your models to/from JSON",
   "type": "package",
   "require": {
-    "php": ">=7.2",
+    "php": ">=7.3",
     "illuminate/support": "^5.4 | ^6.0",
     "illuminate/database": "^5.4 | ^6.0",
     "ext-json": "*"

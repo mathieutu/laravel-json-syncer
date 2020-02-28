@@ -2,6 +2,7 @@
 
 namespace MathieuTu\JsonSyncer\Tests;
 
+use JsonException;
 use MathieuTu\JsonSyncer\Exceptions\JsonDecodingException;
 use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 use MathieuTu\JsonSyncer\Tests\Stubs\Bar;
@@ -159,7 +160,8 @@ class JsonImporterTest extends TestCase
 
     public function testImportBadJson()
     {
-        $this->expectException(JsonDecodingException::class);
+        $this->expectException(JsonException::class);
+        $this->expectExceptionMessage('Syntax error');
 
         Foo::importFromJson('badJson');
     }
