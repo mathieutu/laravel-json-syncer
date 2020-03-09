@@ -1,6 +1,19 @@
 # Changelog
 
 
+<a name="1.3.0"></a>
+## 1.3.0 (2020-03-09)
+
+### Added
+
+- 👷‍♂️ Update Travis config with new api. [[9108f55](https://github.com/mathieutu/laravel-json-syncer/commit/9108f5532c7ee4e14bfc2111e451e0bc1ab3bba4)]
+- 📦 Implement Laravel 7 compatibility. ([#12](https://github.com/mathieutu/laravel-json-syncer/issues/12)) [[f0cc43a](https://github.com/mathieutu/laravel-json-syncer/commit/f0cc43a9a7814482b9273fa4117b1c5508b78006)]
+
+### Fixed
+
+- 💚 Remove forgotten import. [[46292a7](https://github.com/mathieutu/laravel-json-syncer/commit/46292a7521f6848cf1949b7403377fccb7138819)]
+
+
 <a name="1.2.1"></a>
 ## 1.2.1 (2020-02-28)
 
