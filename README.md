@@ -14,17 +14,33 @@ composer require mathieutu/laravel-json-syncer
 ```
 
 Just add the `JsonExportable` and/or `JsonImportable` interfaces and `JsonExporter` and/or `JsonImporter` traits to your models.
+```php
+namespace App\Models;
 
+//...
+use MathieuTu\JsonSyncer\Contracts\JsonExportable;
+use MathieuTu\JsonSyncer\Traits\JsonExporter;
+// or/and
+use MathieuTu\JsonSyncer\Contracts\JsonImportable;
+use MathieuTu\JsonSyncer\Traits\JsonImporter;
+
+class User extends Model implements JsonExportable, JsonImportable
+{
+    use JsonExporter;
+    use JsonImporter;
+    // ...
+}
+```
 No service providers required!
 
 ## Configuration
 
 Out of the box, the Importer and Exporter will automatically guess what attributes and relations to handle, but you can customize everything:
- - JsonExporter: 
+ - JsonExporter:
     By default, it will export all the attributes in the `$fillable` properties, except those with `*_id` pattern, and all the `HasOneOrMany` relations of your model.
     You can change that by setting `$jsonExportableAttributes` and `$jsonExportableRelations` properties or overwriting `getJsonExportableAttributes()` and `getJsonExportableRelations()` methods.
-    
- - JsonImporter: 
+
+ - JsonImporter:
     By default, it will import all the attributes which are in the `$fillable` properties and all the `HasOneOrMany` relations of your model.
     You can change that by setting `$jsonImportableAttributes` and `$jsonImportableRelations` properties or overwriting `getJsonImportableAttributes()` and `getJsonImportableRelations()` methods.
 
