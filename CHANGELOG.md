@@ -1,6 +1,15 @@
 # Changelog
 
 
+<a name="1.4.0"></a>
+## 1.4.0 (2021-03-14)
+
+### Changed
+
+- ⬆️ Update dependencies (min PHP 7.4, Laravel 8) [[da3b967](https://github.com/mathieutu/laravel-json-syncer/commit/da3b9673b5438f4d680c280dbb778d835f145b44)]
+- 👷 Replace Travis with Github actions. [[063df3a](https://github.com/mathieutu/laravel-json-syncer/commit/063df3ab2989a13725ef34c3af4a268a81b58341)]
+
+
 <a name="1.3.0"></a>
 ## 1.3.0 (2020-03-09)
 
