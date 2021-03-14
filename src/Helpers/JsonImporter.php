@@ -12,19 +12,19 @@ use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 
 class JsonImporter
 {
-    private $importable;
+    private JsonImportable $importable;
 
     public function __construct(JsonImportable $importable)
     {
         $this->importable = $importable;
     }
 
-    public static function importFromJson(JsonImportable $importable, $objects)
+    public static function importFromJson(JsonImportable $importable, $objects): void
     {
         (new static($importable))->import($objects);
     }
 
-    public function import($objects)
+    public function import($objects): void
     {
         $objects = $this->convertObjectsToArray($objects);
 
@@ -40,11 +40,11 @@ class JsonImporter
             $objects = json_decode($objects, true, 512, JSON_THROW_ON_ERROR);
         }
 
-        if (method_exists($objects, 'toArray')) {
+        if (is_object($objects) && method_exists($objects, 'toArray')) {
             $objects = $objects->toArray();
         }
 
-        return $this->wrap((array) $objects);
+        return $this->wrap((array)$objects);
     }
 
     protected function wrap(array $objects): array
@@ -56,10 +56,10 @@ class JsonImporter
     {
         $attributes = Arr::only($attributes, $this->importable->getJsonImportableAttributes());
 
-        return $this->importable instanceof Model ?  $this->importable->create($attributes) : $this->importable;
+        return $this->importable instanceof Model ? $this->importable->create($attributes) : $this->importable;
     }
 
-    protected function importRelations($object, $attributes)
+    protected function importRelations($object, $attributes): void
     {
         $relationsNames = array_intersect(array_keys($attributes), $this->importable->getJsonImportableRelations());
 
@@ -71,7 +71,7 @@ class JsonImporter
         }
     }
 
-    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children)
+    protected function importChildrenIfImportable(HasOneOrMany $relation, array $children): void
     {
         $childClass = $relation->getRelated();
         if ($childClass instanceof JsonImportable) {

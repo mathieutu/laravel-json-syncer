@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "gitmoji-changelog": "^1.1.0"
+    "gitmoji-changelog": "^2.2.0"
   },
   "scripts": {
     "changelog": "gitmoji-changelog"

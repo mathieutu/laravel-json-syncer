@@ -9,14 +9,14 @@ use MathieuTu\JsonSyncer\Contracts\JsonExportable;
 
 class JsonExporter
 {
-    private $exportable;
+    private JsonExportable $exportable;
 
     public function __construct(JsonExportable $exportable)
     {
         $this->exportable = $exportable;
     }
 
-    public static function exportToJson(JsonExportable $exportable, $options = 0)
+    public static function exportToJson(JsonExportable $exportable, $options = 0): string
     {
         return self::exportToCollection($exportable)->toJson($options | JSON_THROW_ON_ERROR);
     }
@@ -31,23 +31,16 @@ class JsonExporter
     public function exportAttributes(): Collection
     {
         return collect($this->exportable->getJsonExportableAttributes())
-            ->mapWithKeys(function ($attribute) {
-                return [$attribute => $this->exportable->$attribute];
-            });
+            ->mapWithKeys(fn($attribute) => [$attribute => $this->exportable->$attribute]);
     }
 
     public function exportRelations(): Collection
     {
         return collect($this->exportable->getJsonExportableRelations())
-            ->mapWithKeys(function ($relationName) {
-                return [$relationName => $this->exportable->$relationName()];
-            })->filter(function ($relationObject) {
-                return $relationObject instanceof HasOneOrMany
-                    && $relationObject->getRelated() instanceof JsonExportable;
-            })->map(function (HasOneOrMany $relationObject) {
-                $export = $relationObject->get()->map(function ($object) {
-                    return self::exportToCollection($object);
-                });
+            ->mapWithKeys(fn($relationName) => [$relationName => $this->exportable->$relationName()])
+            ->filter(fn($relationObject) => $relationObject instanceof HasOneOrMany && $relationObject->getRelated() instanceof JsonExportable)
+            ->map(function (HasOneOrMany $relationObject) {
+                $export = $relationObject->get()->map(fn($object) => self::exportToCollection($object));
 
                 return $relationObject instanceof HasOne ? $export->first() : $export;
             });
