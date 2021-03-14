@@ -1,8 +1,8 @@
 # Laravel Json Syncer: Json importer and exporter for Laravel
 
-[![Travis build](https://img.shields.io/travis/mathieutu/laravel-json-syncer/master.svg?style=flat-square&label=Build)](https://travis-ci.org/mathieutu/laravel-json-syncer?branch=master) 
-[![Test coverage](https://img.shields.io/scrutinizer/coverage/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Coverage)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=master) 
-[![Code quality](https://img.shields.io/scrutinizer/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Quality)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=master) 
+[![Github checks](https://img.shields.io/github/checks-status/mathieutu/laravel-json-syncer/main.svg?style=flat-square)](https://github.com/mathieutu/laravel-json-syncer/actions) 
+[![Test coverage](https://img.shields.io/scrutinizer/coverage/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Coverage)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=main) 
+[![Code quality](https://img.shields.io/scrutinizer/g/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Quality)](https://scrutinizer-ci.com/g/mathieutu/laravel-json-syncer/?branch=main) 
 [![Packagist downloads](https://img.shields.io/packagist/dt/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/mathieutu/laravel-json-syncer)
 [![Stable version](https://img.shields.io/packagist/v/mathieutu/laravel-json-syncer.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/mathieutu/laravel-json-syncer)
 
