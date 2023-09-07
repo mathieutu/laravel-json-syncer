@@ -1,6 +1,20 @@
 # Changelog
 
 
+<a name="1.5.0"></a>
+## 1.5.0 (2023-09-07)
+
+### Changed
+
+- ⬆️ Upgrade dependencies. [[1a5aecf](https://github.com/mathieutu/laravel-json-syncer/commit/1a5aecf37f220c57f7e3a02747aeeb949f941198)]
+- ⬆️ Upgrade to GitHub-native Dependabot ([#17](https://github.com/mathieutu/laravel-json-syncer/issues/17)) [[1509e51](https://github.com/mathieutu/laravel-json-syncer/commit/1509e51405f9ead60fa681d62a36d9e9176a6db8)]
+
+### Miscellaneous
+
+- 📝 Improve README. [[cc3cdd4](https://github.com/mathieutu/laravel-json-syncer/commit/cc3cdd4aa35687243f3f8ba6f117f12827ab9e70)]
+- 📝 Add installation example. ([#16](https://github.com/mathieutu/laravel-json-syncer/issues/16)) [[09d8713](https://github.com/mathieutu/laravel-json-syncer/commit/09d871366c1d0891fda2c017d69f43ae61ad42f7)]
+
+
 <a name="1.4.0"></a>
 ## 1.4.0 (2021-03-14)
 
