@@ -7,13 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Support\Collection;
 use MathieuTu\JsonSyncer\Contracts\JsonExportable;
 
-class JsonExporter
+readonly class JsonExporter
 {
-    private JsonExportable $exportable;
-
-    public function __construct(JsonExportable $exportable)
+    public function __construct(private JsonExportable $exportable)
     {
-        $this->exportable = $exportable;
     }
 
     public static function exportToJson(JsonExportable $exportable, $options = 0): string
@@ -38,9 +35,11 @@ class JsonExporter
     {
         return collect($this->exportable->getJsonExportableRelations())
             ->mapWithKeys(fn($relationName) => [$relationName => $this->exportable->$relationName()])
-            ->filter(fn($relationObject) => $relationObject instanceof HasOneOrMany && $relationObject->getRelated() instanceof JsonExportable)
+            ->filter(fn($relationObject) => (
+                $relationObject instanceof HasOneOrMany && $relationObject->getRelated() instanceof JsonExportable
+            ))
             ->map(function (HasOneOrMany $relationObject) {
-                $export = $relationObject->get()->map(fn($object) => self::exportToCollection($object));
+                $export = $relationObject->get()->map(self::exportToCollection(...));
 
                 return $relationObject instanceof HasOne ? $export->first() : $export;
             });

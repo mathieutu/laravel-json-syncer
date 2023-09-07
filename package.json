@@ -1,7 +1,7 @@
 {
   "version": "1.4.0",
   "devDependencies": {
-    "gitmoji-changelog": "^2.2.0"
+    "gitmoji-changelog": "^2.3.0"
   },
   "scripts": {
     "changelog": "gitmoji-changelog"

@@ -10,13 +10,10 @@ use Illuminate\Support\Str;
 use MathieuTu\JsonSyncer\Contracts\JsonImportable;
 use MathieuTu\JsonSyncer\Exceptions\UnknownAttributeException;
 
-class JsonImporter
+readonly class JsonImporter
 {
-    private JsonImportable $importable;
-
-    public function __construct(JsonImportable $importable)
+    public function __construct(private JsonImportable $importable)
     {
-        $this->importable = $importable;
     }
 
     public static function importFromJson(JsonImportable $importable, $objects): void
@@ -52,14 +49,14 @@ class JsonImporter
         return (empty($objects) || is_array(reset($objects))) ? $objects : [$objects];
     }
 
-    protected function importAttributes($attributes): JsonImportable
+    protected function importAttributes(array $attributes): JsonImportable
     {
         $attributes = Arr::only($attributes, $this->importable->getJsonImportableAttributes());
 
         return $this->importable instanceof Model ? $this->importable->create($attributes) : $this->importable;
     }
 
-    protected function importRelations($object, $attributes): void
+    protected function importRelations(mixed $object, array $attributes): void
     {
         $relationsNames = array_intersect(array_keys($attributes), $this->importable->getJsonImportableRelations());
 
@@ -74,6 +71,7 @@ class JsonImporter
     protected function importChildrenIfImportable(HasOneOrMany $relation, array $children): void
     {
         $childClass = $relation->getRelated();
+
         if ($childClass instanceof JsonImportable) {
             $children = $this->addParentKeyToChildren($children, $relation);
 
@@ -90,7 +88,7 @@ class JsonImporter
         }, $children);
     }
 
-    protected function getRelationObject($object, $relationName): HasOneOrMany
+    protected function getRelationObject(mixed $object, string $relationName): HasOneOrMany
     {
         $relationName = Str::camel($relationName);
 

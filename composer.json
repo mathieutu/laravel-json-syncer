@@ -3,15 +3,15 @@
   "description": "Export and import your Eloquent models to/from JSON",
   "type": "package",
   "require": {
-    "php": ">=7.4",
-    "illuminate/support": "^8.0",
-    "illuminate/database": "^8.0",
+    "php": ">=8.2",
+    "illuminate/support": "^v10.22.0",
+    "illuminate/database": "^v10.22.0",
     "ext-json": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
-    "orchestra/testbench": "^6.13",
-    "squizlabs/php_codesniffer": "^3.5"
+    "phpunit/phpunit": "^10.1",
+    "orchestra/testbench": "^v8.10.1",
+    "squizlabs/php_codesniffer": "^3.7.2"
   },
   "license": "MIT",
   "authors": [

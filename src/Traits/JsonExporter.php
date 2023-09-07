@@ -9,8 +9,8 @@ use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
 trait JsonExporter
 {
-    protected $jsonExportableRelations;
-    protected $jsonExportableAttributes;
+    protected array $jsonExportableRelations;
+    protected array $jsonExportableAttributes;
 
     public function exportToJson($jsonOptions = 0): string
     {
@@ -24,14 +24,17 @@ trait JsonExporter
 
     public function getJsonExportableAttributes(): array
     {
-        return $this->jsonExportableAttributes ?? array_filter($this->getFillable(), function ($attribute) {
-            return ! Str::endsWith($attribute, '_id');
-        });
+        return $this->jsonExportableAttributes
+            ?? array_filter(
+                $this->getFillable(),
+                fn(string $attribute) => ! Str::endsWith($attribute, '_id')
+            );
     }
 
     public function getJsonExportableRelations(): array
     {
-        return $this->jsonExportableRelations ?? RelationsInModelFinder::hasOneOrMany($this);
+        return $this->jsonExportableRelations
+            ?? RelationsInModelFinder::hasOneOrMany($this);
     }
 
     public function isExporting(): bool

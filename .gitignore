@@ -6,4 +6,6 @@
 /package-lock.json
 
 .phpunit.result.cache
+/.phpunit.cache
+
 .idea

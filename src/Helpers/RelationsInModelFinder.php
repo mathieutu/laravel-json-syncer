@@ -5,15 +5,10 @@ namespace MathieuTu\JsonSyncer\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class RelationsInModelFinder
+readonly class RelationsInModelFinder
 {
-    private $model;
-    private $relationsType;
-
-    public function __construct(Model $model, array $relationsType)
+    public function __construct(private Model $model, private array $relationsType)
     {
-        $this->model = $model;
-        $this->relationsType = $relationsType;
     }
 
     public static function hasOneOrMany(Model $model): array
@@ -24,18 +19,16 @@ class RelationsInModelFinder
     protected function find(): array
     {
         return collect(get_class_methods($this->model))->sort()
-            ->reject(function ($method) {
-                return $this->isAnEloquentMethod($method);
-            })->filter(function ($method) {
+            ->reject($this->isAnEloquentMethod(...))
+            ->filter(function (string $method) {
                 $code = $this->getMethodCode($method);
 
-                return collect($this->relationsType)->contains(function ($relation) use ($code) {
-                    return Str::contains($code, '$this->' . $relation . '(');
-                });
+                return collect($this->relationsType)
+                    ->contains(fn(string $relation) => Str::contains($code, "\$this->{$relation}("));
             })->toArray();
     }
 
-    protected function isAnEloquentMethod($method): bool
+    protected function isAnEloquentMethod(string $method): bool
     {
         return Str::startsWith($method, 'get') ||
             Str::startsWith($method, 'set') ||
@@ -43,7 +36,7 @@ class RelationsInModelFinder
             method_exists(Model::class, $method);
     }
 
-    protected function getMethodCode($method): string
+    protected function getMethodCode(string $method): string
     {
         $reflection = new \ReflectionMethod($this->model, $method);
 

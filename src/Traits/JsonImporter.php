@@ -7,10 +7,10 @@ use MathieuTu\JsonSyncer\Helpers\RelationsInModelFinder;
 
 trait JsonImporter
 {
-    protected $jsonImportableAttributes;
-    protected $jsonImportableRelations;
+    protected array $jsonImportableAttributes;
+    protected array $jsonImportableRelations;
 
-    public static function importFromJson($objects)
+    public static function importFromJson($objects): void
     {
         ImporterHelper::importFromJson(new static, $objects);
     }

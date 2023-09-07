@@ -10,7 +10,7 @@ interface JsonExportable
 
     public function getJsonExportableRelations(): array;
 
-    public function exportToJson($jsonOptions = 0): string;
+    public function exportToJson(int $jsonOptions = 0): string;
 
     public function exportToCollection(): Collection;
 
