@@ -13,7 +13,7 @@ Require this package in your composer.json and update composer.
 composer require mathieutu/laravel-json-syncer
 ```
 
-Just add the `JsonExportable` and/or `JsonImportable` interfaces and `JsonExporter` and/or `JsonImporter` traits to your models.
+Add the `JsonExportable` and/or `JsonImportable` interfaces and `JsonExporter` and/or `JsonImporter` traits to your models.
 ```php
 namespace App\Models;
 
@@ -31,22 +31,21 @@ class User extends Model implements JsonExportable, JsonImportable
     // ...
 }
 ```
-No service providers required!
 
 ## Configuration
 
 Out of the box, the Importer and Exporter will automatically guess what attributes and relations to handle, but you can customize everything:
  - JsonExporter:
     By default, it will export all the attributes in the `$fillable` properties, except those with `*_id` pattern, and all the `HasOneOrMany` relations of your model.
-    You can change that by setting `$jsonExportableAttributes` and `$jsonExportableRelations` properties or overwriting `getJsonExportableAttributes()` and `getJsonExportableRelations()` methods.
+    You can change that by setting the `$jsonExportableAttributes` and `$jsonExportableRelations` properties or overwriting the `getJsonExportableAttributes()` and `getJsonExportableRelations()` methods.
 
  - JsonImporter:
     By default, it will import all the attributes which are in the `$fillable` properties and all the `HasOneOrMany` relations of your model.
-    You can change that by setting `$jsonImportableAttributes` and `$jsonImportableRelations` properties or overwriting `getJsonImportableAttributes()` and `getJsonImportableRelations()` methods.
+    You can change that by setting the `$jsonImportableAttributes` and `$jsonImportableRelations` properties or overwriting the `getJsonImportableAttributes()` and `getJsonImportableRelations()` methods.
 
 ## Usage
 
-Just use the `$model->exportToJson($jsonOptions = 0)` to export the object and all its attributes and children.
+Use the `$model->exportToJson($jsonOptions = 0)` to export the object, all its attributes and its children (via its relations).
 
 Use `Model::importFromJson($objectsToCreate)` to import a json string or its array version.
 
@@ -113,7 +112,7 @@ It will return:
 ```
 
 #### How to import
-And exactly the same for the opposite. We can import the json returned by the previous method, or an other one.
+And exactly the same for the opposite. We can import the json returned by the previous method, or another one.
 For the exact same app If we want to import this new very simple set of data:
 ```json
 {
